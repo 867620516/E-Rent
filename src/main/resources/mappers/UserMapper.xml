@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="graduation.spring.erent.app.dao.UserMapper">
+    <!--单参数情况下可以不写parameterType-->
+    <!--find方法-->
+    <select id="find" resultType="graduation.spring.erent.app.model.User">
+        select
+        id,
+        user_name as 'username',
+        password,
+        phone,
+        email,
+        follower_num as 'follower',
+        following_num as 'following'
+        from user
+        <where>
+            <if test="username !=null and username != ''">
+                and user_name=#{username}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phone !=null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="password !=null and password != ''">
+                and password = #{password}
+            </if>
+        </where>
+        limit 1
+    </select>
+
+
+
+    <!--插入语句-->
+    <insert id="insert">
+        insert into user (
+          user_name,
+          password,
+          phone,
+          email,
+          follower_num,
+          following_num
+        )values(
+          #{username},
+          #{password},
+          #{phone},
+          #{email},
+          #{follower},
+          #{following}
+        )
+    </insert>
+
+    <!--更新操作-->
+    <update id="update">
+        update user set
+          user_name = #{username},
+          password = #{password},
+          phone = #{phone},
+          email = #{email},
+          follower_num = #{follower},
+          following_num = #{following}
+        where id = #{id}
+    </update>
+
+
+</mapper>

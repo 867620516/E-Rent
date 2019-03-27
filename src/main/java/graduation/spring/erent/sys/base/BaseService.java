@@ -46,12 +46,12 @@ public class BaseService<T extends BaseModel,D extends BaseDao<T>> {
      * 专门用来返回分页数据的方法
      * @param t
      * @param pageNum 当前页（第几页）
-     * @param pageSiza
+     * @param pageSize
      * @return
      */
-    public PageInfo<T> pageInfo(T t, Integer pageNum, Integer pageSiza){
+    public PageInfo<T> pageInfo(T t, Integer pageNum, Integer pageSize){
         //采用静态方法
-        PageHelper.startPage(pageNum,pageSiza);
+        PageHelper.startPage(pageNum,pageSize);
         //调用具体的查询方法
         List<T> list = dao.findList(t);
         PageInfo<T> pageInfo = new PageInfo<>(list);
