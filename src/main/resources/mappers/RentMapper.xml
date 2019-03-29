@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="graduation.spring.erent.app.dao.RentMapper">
+    <resultMap id="rentMap" type="graduation.spring.erent.app.model.Rental">
+        <id column="id" property="id"/>
+        <result column="rent_item_name" property="itemName"/>
+        <result column="arrival_date" property="arrivalDate"/>
+        <result column="rental_price" property="rentalPrice"/>
+        <result column="rental_interval" property="rentalInterval"/>
+        <result column="district" property="district"/>
+        <result column="user_id" property="userID"/>
+        <result column="amount" property="amount"/>
+        <result column="deposit_price" property="depositPrice"/>
+        <result column="is_brand_new" property="isBrandNew"/>
+        <result column="is_bargain" property="isBargain"/>
+        <result column="description" property="description"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <collection property="imageList" ofType="java.lang.String">
+            <result column="icon_image"/>
+        </collection>
+    </resultMap>
+    <select id="find" resultMap="rentMap">
+        SELECT
+               id,
+               rent_item_name,
+               arrival_date,
+               rental_price,
+               rental_interval,
+               district,
+               user_id,
+               amount,
+               deposit_price,
+               is_brand_new,
+               is_bargain,
+               description,
+               is_deleted,
+               icon_image
+        FROM rent_image ri ,rent_item r
+        where ri.rent_id = r.id and r.id = #{id};
+    </select>
+    
+    <insert id="insert">
+        insert into rent_item ( rent_item_name, arrival_date,  rental_price, rental_interval,district, user_id, amount,
+                               deposit_price, is_brand_new, is_bargain, description, is_deleted)
+        values (
+                #{itemName},
+                #{arrivalDate},
+                #{rentalPrice},
+                #{rentalInterval},
+                #{district},
+                #{userID},
+                #{amount},
+                #{depositPrice},
+                #{isBrandNew},
+                #{isBargain},
+                #{description},
+                0
+               );
+    </insert>
+
+    <insert id="insertImages">
+        insert into rent_image (rent_id, icon_image)
+        values (
+                #{id},
+                #{image}
+               );
+    </insert>
+    <update id="delete">
+        update rent_item
+        set  is_deleted = 1
+        where id = #{id};
+    </update>
+</mapper>

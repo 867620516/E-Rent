@@ -15,4 +15,5 @@ public class User extends BaseModel {
     private String email;
     private int follower;
     private int following;
+    private String icon;
 }

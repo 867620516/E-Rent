@@ -13,7 +13,7 @@ public class BaseService<T extends BaseModel,D extends BaseDao<T>> {
     protected D dao;
 
     public void save(T t){
-        if(t.getId()!=null){
+        if(t.getId() != 0){
             dao.update(t);
         }else{
             dao.insert(t);
@@ -23,12 +23,12 @@ public class BaseService<T extends BaseModel,D extends BaseDao<T>> {
     public void delete(T t){
         dao.delete(t);
     }
-    public void delete(Long id){
+    public void delete(int id){
         dao.delete(id);
     }
 
 
-    public T findById(Long id){
+    public T findById(int id){
         return dao.findById(id);
     }
 

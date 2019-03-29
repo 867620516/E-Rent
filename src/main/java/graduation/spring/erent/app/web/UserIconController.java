@@ -1,0 +1,13 @@
+package graduation.spring.erent.app.web;
+
+import graduation.spring.erent.app.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class UserIconController {
+    @Autowired
+    UserService userService;
+
+
+}

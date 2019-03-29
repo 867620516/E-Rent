@@ -8,12 +8,13 @@
     <select id="find" resultType="graduation.spring.erent.app.model.User">
         select
         id,
-        user_name as 'username',
+        user_name as username,
         password,
         phone,
         email,
-        follower_num as 'follower',
-        following_num as 'following'
+        follower_num as follower,
+        following_num as following,
+        user_icon as icon
         from user
         <where>
             <if test="username !=null and username != ''">
@@ -61,7 +62,8 @@
           phone = #{phone},
           email = #{email},
           follower_num = #{follower},
-          following_num = #{following}
+          following_num = #{following},
+          user_icon = #{icon}
         where id = #{id}
     </update>
 
