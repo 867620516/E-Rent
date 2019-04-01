@@ -49,8 +49,8 @@
           #{password},
           #{phone},
           #{email},
-          #{follower},
-          #{following}
+          0,
+          0
         )
     </insert>
 
