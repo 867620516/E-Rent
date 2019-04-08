@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -24,5 +27,21 @@ public class LoginController {
         //存储注册信息
         userService.save(user);
         return user;
+    }
+
+    @PostMapping("/api/signIn")
+    @ResponseBody
+    public User login(@RequestBody User user, HttpSession session){
+        /*User tmp = new User();
+        tmp.setUsername(username);
+        tmp.setPassword(password);*/
+
+        return userService.find(user);
+
+        /*if (principal!=null){
+            session.setAttribute("principal",principal);
+            return "{\"status\":\"success\"}";
+        }
+        return "{\"status\":\"fail\"}";*/
     }
 }
