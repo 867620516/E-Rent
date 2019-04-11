@@ -11,6 +11,7 @@
         <result column="rental_interval" property="rentalInterval"/>
         <result column="district" property="district"/>
         <result column="user_id" property="userID"/>
+        <result column="user_name" property="userName"/>
         <result column="amount" property="amount"/>
         <result column="deposit_price" property="depositPrice"/>
         <result column="is_brand_new" property="isBrandNew"/>
@@ -22,25 +23,23 @@
         </collection>
     </resultMap>
     <select id="find" resultMap="rentMap">
-        SELECT
-               id,
-               rent_item_name,
-               arrival_date,
-               rental_price,
-               rental_interval,
-               district,
-               user_id,
-               amount,
-               deposit_price,
-               is_brand_new,
-               is_bargain,
-               description,
-               is_deleted,
-               icon_image
-        FROM rent_image ri ,rent_item r
-        where ri.rent_id = r.id and r.id = #{id};
+        SELECT *
+        FROM rent_image ri ,rent_item r,user u
+        where ri.rent_id = r.id and r.id = #{id} and u.id = r.user_id;
     </select>
-    
+
+    <select id="findList" resultMap="rentMap">
+        select *
+        FROM rent_item r
+        left join rent_image ri on r.id = ri.rent_id
+        left join user u on r.user_id = u.id
+        <where>
+            <if test="itemName!=null and itemName!= ''">
+                and r.rent_item_name = #{itemName}
+            </if>
+        </where>
+    </select>
+
     <insert id="insert">
         insert into rent_item ( rent_item_name, arrival_date,  rental_price, rental_interval,district, user_id, amount,
                                deposit_price, is_brand_new, is_bargain, description, is_deleted)

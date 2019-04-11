@@ -31,6 +31,13 @@ public class ErentApplicationTests {
     }
 
     @Test
+    public void findRList(){
+        Rental r = new Rental();
+        List<Rental> list = rentService.findList(r);
+        System.out.println(list.get(0).getItemName());
+    }
+
+    @Test
     public void findImage(){
         Rental r = new Rental();
         r.setId(1);
@@ -39,13 +46,6 @@ public class ErentApplicationTests {
         for(String image:imageList){
             System.out.println(image);
         }
-    }
-
-    @Test
-    public void insertRental(){
-        Rental rental = new Rental("金妙家用精准电子秤体重秤成人健康减肥称重人体秤卡通充电秤计器",new Date(),20.0,"周",
-                "浙江宁波",2,1,100.0,false,false,"称面采用高强度钢化玻璃，抗力冲击。上称自动称，无需开关。安全防侧翻，更稳固、安全。尺寸:260mm ×260mm电池款22.9元USB 充电款26.9元",false,null);
-        rentService.save(rental);
     }
 
     @Test
