@@ -29,6 +29,14 @@ public class ErentApplicationTests {
     @Test
     public void contextLoads() {
     }
+    @Test
+    public void findNull(){
+        User user = new User();
+        user.setUsername("389823");
+        if(userService.find(user) == null){
+            System.out.println("000");
+        }
+    }
 
     @Test
     public void findRList(){

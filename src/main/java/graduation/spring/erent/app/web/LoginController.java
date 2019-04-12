@@ -4,17 +4,25 @@ import graduation.spring.erent.app.model.User;
 import graduation.spring.erent.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-@Controller
+@RestController
 public class LoginController {
 
     @Autowired
     private UserService userService;
+
+    @PostMapping("/api/hasregined")
+    public String  hasReged(@RequestBody User user){
+        /*User user = new User();
+        user.setUsername(username);*/
+        if(userService.find(user)==null){
+            return "{\"has\":\"false\",\"statusText\":\"OK\"}";
+        }
+        return "{\"has\":\"true\",\"statusText\":\"用户名已注册\"}";
+    }
 
 
     /**
@@ -22,14 +30,15 @@ public class LoginController {
      * @param user
      * @return
      */
-    @PostMapping("/api/signUp")
+    @RequestMapping("/api/regin")
     public User signUp(@RequestBody User user){
         //存储注册信息
         userService.save(user);
-        return user;
+
+        return userService.find(user);
     }
 
-    @PostMapping("/api/signIn")
+    @PostMapping("/api/login")
     @ResponseBody
     public User login(@RequestBody User user, HttpSession session){
         /*User tmp = new User();
