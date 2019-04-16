@@ -19,6 +19,7 @@ public class Rental extends BaseModel {
     private String district;//出租者所在地区
     private int userID;
     private String userName;
+    private String userIcon;
     private int amount;
     private Double depositPrice;//押金
     private boolean isBrandNew;

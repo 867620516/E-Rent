@@ -23,7 +23,7 @@ public class RentalController {
     }
 
     @RequestMapping("/api/oneRental")
-    public Rental findOne(@PathVariable String id){
+    public Rental findOne(String id){
         Rental rental = new Rental();
         rental.setId(Integer.parseInt(id));
         return  rentService.find(rental);

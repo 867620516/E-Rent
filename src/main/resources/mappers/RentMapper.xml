@@ -12,6 +12,7 @@
         <result column="district" property="district"/>
         <result column="user_id" property="userID"/>
         <result column="user_name" property="userName"/>
+        <result column="user_icon" property="userIcon"/>
         <result column="amount" property="amount"/>
         <result column="deposit_price" property="depositPrice"/>
         <result column="is_brand_new" property="isBrandNew"/>
