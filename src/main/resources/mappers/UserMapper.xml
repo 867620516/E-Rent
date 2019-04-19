@@ -67,5 +67,31 @@
         where id = #{id}
     </update>
 
+    <select id="getER" resultType="graduation.spring.erent.app.model.User">
+        select
+            u.id as id,
+            user_name as username,
+            password,
+            phone,
+            email,
+            follower_num as follower,
+            following_num as following,
+            user_icon as icon
 
+        from follow f ,user u
+        where f.user_id = #{id} and f.follower_id = u.id
+    </select>
+    <select id="getING" resultType="graduation.spring.erent.app.model.User">
+        select
+            u.id as id,
+            user_name as username,
+            password,
+            phone,
+            email,
+            follower_num as follower,
+            following_num as following,
+            user_icon as icon
+        from follow f ,user u
+        where f.follower_id = #{id} and f.user_id = u.id
+    </select>
 </mapper>

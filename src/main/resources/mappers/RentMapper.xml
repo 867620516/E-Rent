@@ -38,6 +38,9 @@
             <if test="itemName!=null and itemName!= ''">
                 and r.rent_item_name = #{itemName}
             </if>
+            <if test="userID!=null and userID!=''">
+                and r.user_id = #{userID}
+            </if>
         </where>
     </select>
 
@@ -67,6 +70,21 @@
                 #{image}
                );
     </insert>
+
+    <update id="update">
+        update rent_item set
+                             rent_item_name = #{itemName},
+                             rental_price = #{rentalPrice},
+                             rental_interval = #{rentalInterval},
+                             district = #{district},
+                             user_id = #{userID},
+                             amount = #{amount},
+                             deposit_price = #{depositPrice},
+                             is_brand_new = #{isBrandNew},
+                             is_bargain = #{isBargain},
+                             description = #{description}
+        where id = #{id}
+    </update>
     <update id="delete">
         update rent_item
         set  is_deleted = 1

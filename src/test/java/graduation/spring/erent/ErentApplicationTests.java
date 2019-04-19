@@ -39,6 +39,20 @@ public class ErentApplicationTests {
     }
 
     @Test
+    public void getERnum(){
+        List<User> er = userService.getER(1);
+        User u = er.get(0);
+        System.out.println(u.getId());
+    }
+
+    @Test
+    public void getINGnum(){
+        List<User> er = userService.getING(1);
+        User u = er.get(0);
+        System.out.println(u.getId());
+    }
+
+    @Test
     public void findRList(){
         Rental r = new Rental();
         List<Rental> list = rentService.findList(r);
