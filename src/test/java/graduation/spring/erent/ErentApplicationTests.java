@@ -29,6 +29,13 @@ public class ErentApplicationTests {
     @Test
     public void contextLoads() {
     }
+
+    @Test
+    public void search(){
+        List<Rental> rentals = rentService.searchMy(1,"新");
+        System.out.println(rentals.get(0).getItemName());
+    }
+
     @Test
     public void findNull(){
         User user = new User();

@@ -4,6 +4,7 @@ import graduation.spring.erent.app.model.Rental;
 import graduation.spring.erent.app.model.User;
 import graduation.spring.erent.app.service.RentService;
 import graduation.spring.erent.app.service.UserService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,4 +47,15 @@ public class RentalController {
         return "{\"msg\":\"发布租赁成功\",\"edit\":\"修改商品信息成功\"}";
     }
 
+    @RequestMapping("/api/search")
+    public List<Rental> search(String searchName){
+        List<Rental> list = rentService.search(searchName);
+        return list;
+    }
+
+    @RequestMapping("/api/searchMy")
+    public List<Rental> searchMy(@Param("id") String id,@Param("searchName") String searchName){
+        List<Rental> list = rentService.searchMy(Integer.parseInt(id),searchName);
+        return list;
+    }
 }

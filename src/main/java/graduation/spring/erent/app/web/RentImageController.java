@@ -1,7 +1,6 @@
 package graduation.spring.erent.app.web;
 
 import graduation.spring.erent.app.model.Result;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +22,7 @@ public class RentImageController {
 
         //获取文件在服务器的储存位置
         //String path = request.getSession().getServletContext().getRealPath("/upload");
-        String path = ResourceUtils.getURL("classpath:").getPath()+ "upload";
+        String path = ResourceUtils.getURL("classpath:").getPath()+ "static";
         File filePath = new File(path);
         System.out.println("文件的保存路径：" + path);
         if (!filePath.exists() && !filePath.isDirectory()) {
@@ -56,7 +55,7 @@ public class RentImageController {
             picture.transferTo(targetFile);
             System.out.println("上传成功");
             //将文件在服务器的存储路径返回
-            return new Result(true,path.substring(1)+"/" + fileName);
+            return new Result(true,"http://localhost:8888/" + fileName);
         } catch (IOException e) {
             System.out.println("上传失败");
             e.printStackTrace();
