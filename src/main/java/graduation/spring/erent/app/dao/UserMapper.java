@@ -10,4 +10,5 @@ import java.util.List;
 public interface UserMapper extends BaseDao<User> {
     List<User> getER (int id);
     List<User> getING (int id);
+    void updateIcon (User user);
 }

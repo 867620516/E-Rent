@@ -60,10 +60,13 @@
           user_name = #{username},
           password = #{password},
           phone = #{phone},
-          email = #{email},
-          follower_num = #{follower},
-          following_num = #{following},
-          user_icon = #{icon}
+          email = #{email}
+        where id = #{id}
+    </update>
+
+    <update id="updateIcon">
+        update user set
+           user_icon = #{icon}
         where id = #{id}
     </update>
 

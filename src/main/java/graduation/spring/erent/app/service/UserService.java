@@ -15,5 +15,6 @@ public class UserService extends BaseService<User, UserMapper> {
 
     public List<User> getER(int id){ return  dao.getER(id);}
     public List<User> getING(int id){ return  dao.getING(id);}
+    public void updateIcon(User user){dao.updateIcon(user);}
 
 }
