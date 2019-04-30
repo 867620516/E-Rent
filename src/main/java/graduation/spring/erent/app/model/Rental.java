@@ -25,6 +25,7 @@ public class Rental extends BaseModel {
     private boolean isBrandNew;
     private boolean isBargain;
     private String description;
+    private String info;
     private boolean isDeleted;
     private List<String> imageList;
 }

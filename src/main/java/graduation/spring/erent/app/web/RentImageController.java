@@ -23,7 +23,7 @@ public class RentImageController {
     UserService userService;
 
     @RequestMapping("/api/upload")
-    public Result upload(@RequestParam("file") MultipartFile picture, HttpServletRequest request) throws FileNotFoundException {
+    public Result upload(@RequestParam("file") MultipartFile picture) throws FileNotFoundException {
 
         //获取文件在服务器的储存位置
         //String path = request.getSession().getServletContext().getRealPath("/upload");

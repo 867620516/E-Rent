@@ -15,6 +15,7 @@
         <result column="user_icon" property="userIcon"/>
         <result column="amount" property="amount"/>
         <result column="deposit_price" property="depositPrice"/>
+        <result column="info" property="info"/>
         <result column="is_brand_new" property="isBrandNew"/>
         <result column="is_bargain" property="isBargain"/>
         <result column="description" property="description"/>
@@ -71,7 +72,7 @@
 
     <insert id="insert">
         insert into rent_item ( rent_item_name, arrival_date,  rental_price, rental_interval,district, user_id, amount,
-                               deposit_price, is_brand_new, is_bargain, description, is_deleted)
+                               deposit_price, is_brand_new, is_bargain, description, info, is_deleted)
         values (
                 #{itemName},
                 #{arrivalDate},
@@ -84,6 +85,7 @@
                 #{isBrandNew},
                 #{isBargain},
                 #{description},
+                #{info},
                 0
                );
     </insert>
@@ -107,7 +109,8 @@
                              deposit_price = #{depositPrice},
                              is_brand_new = #{isBrandNew},
                              is_bargain = #{isBargain},
-                             description = #{description}
+                             description = #{description},
+                             info = #{info}
         where id = #{id}
     </update>
     <update id="delete">
