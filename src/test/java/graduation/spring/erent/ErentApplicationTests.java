@@ -1,8 +1,10 @@
 package graduation.spring.erent;
 
 import graduation.spring.erent.app.model.Rental;
+import graduation.spring.erent.app.model.Talk;
 import graduation.spring.erent.app.model.User;
 import graduation.spring.erent.app.service.RentService;
+import graduation.spring.erent.app.service.TalkService;
 import graduation.spring.erent.app.service.UserService;
 import graduation.spring.erent.sys.config.AppConfig;
 import org.junit.Test;
@@ -26,8 +28,23 @@ public class ErentApplicationTests {
     @Autowired
     private RentService rentService;
 
+    @Autowired
+    private TalkService talkService;
+
     @Test
     public void contextLoads() {
+    }
+
+
+    @Test
+    public void talktest(){
+        Talk talk = new Talk();
+        talk.setUserID(2);
+        talk.setId(32);
+        Talk talk1 = talkService.find(talk);
+        System.out.println(talk1.getContent());
+        System.out.println(talk1.getCreateTime());
+
     }
 
     @Test

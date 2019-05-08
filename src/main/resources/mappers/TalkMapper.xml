@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="graduation.spring.erent.app.dao.TalkMapper">
+    <resultMap id="talkMap" type="graduation.spring.erent.app.model.Talk">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="click_rate" property="clickRate"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="create_time" property="createTime"/>
+        <result column="reply_time" property="replyTime"/>
+        <result column="userid" property="userID"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_icon" property="userIcon"/>
+    </resultMap>
+    <select id="find" resultType="graduation.spring.erent.app.model.Talk">
+        select * from article
+        where userid = #{userID} and id = #{id}
+    </select>
+
+    <select id="findList" resultMap="talkMap">
+        select * from article a
+        left join user u on u.id = a.userid
+        <where>
+          <if test="userID!=null and userID!=''">
+              and a.userid = #{userID}
+          </if>
+        </where>
+        order by a.create_time desc
+    </select>
+    <select id="findById" resultMap="talkMap">
+        select * from article a
+                          left join user u on u.id = a.userid
+        where a.id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="graduation.spring.erent.app.model.Talk">
+        insert into article (content, click_rate, comment_count, create_time, reply_time, userid, del)
+        values (
+                #{content},
+                #{clickRate},
+                #{commentCount},
+                #{createTime},
+                #{replyTime},
+                #{userID},
+                #{del}
+               )
+    </insert>
+</mapper>
