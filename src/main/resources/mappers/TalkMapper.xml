@@ -15,12 +15,12 @@
         <result column="user_icon" property="userIcon"/>
     </resultMap>
     <select id="find" resultType="graduation.spring.erent.app.model.Talk">
-        select * from article
+        select * from talk
         where userid = #{userID} and id = #{id}
     </select>
 
     <select id="findList" resultMap="talkMap">
-        select * from article a
+        select * from talk a
         left join user u on u.id = a.userid
         <where>
           <if test="userID!=null and userID!=''">
@@ -30,13 +30,24 @@
         order by a.create_time desc
     </select>
     <select id="findById" resultMap="talkMap">
-        select * from article a
+        select * from talk a
                           left join user u on u.id = a.userid
         where a.id = #{id}
     </select>
 
+    <update id="addClickRateById">
+        update talk set click_rate = click_rate+${number}
+        where  id = #{id}
+    </update>
+
+    <update id="addCommentCountById">
+        update talk set comment_count = comment_count+${number}
+          where
+            id = #{id}
+    </update>
+
     <insert id="insert" parameterType="graduation.spring.erent.app.model.Talk">
-        insert into article (content, click_rate, comment_count, create_time, reply_time, userid, del)
+        insert into talk (content, click_rate, comment_count, create_time, reply_time, userid, del)
         values (
                 #{content},
                 #{clickRate},

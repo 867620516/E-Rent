@@ -3,6 +3,7 @@ package graduation.spring.erent.app.web;
 import graduation.spring.erent.app.model.Talk;
 import graduation.spring.erent.app.service.TalkService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,8 @@ import java.util.List;
 public class talkController {
     @Autowired
     TalkService talkService;
+
+
 
     @RequestMapping("/api/testTalk")
     public void testTalk(@RequestBody Talk talk){
@@ -33,6 +36,9 @@ public class talkController {
 
     @RequestMapping("/api/talkById")
     public Talk talkById(String id){
+
+        talkService.addClickRateById(Integer.parseInt(id));
+
         return talkService.findById(Integer.parseInt(id));
     }
 

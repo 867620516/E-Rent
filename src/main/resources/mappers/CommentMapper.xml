@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="graduation.spring.erent.app.dao.CommentMapper">
+    <resultMap id="CommentResponse" type="graduation.spring.erent.app.model.response.CommentResponse">
+        <id column="id" property="id"/>
+        <result column="talkid" property="talkID"/>
+        <result column="userid" property="userID"/>
+        <result column="parentid" property="parentID"/>
+        <result column="comment" property="comment"/>
+        <result column="create_time" property="createTime"/>
+        <result column="replier_id" property="replierID"/>
+        <result column="replier_name" property="replierName"/>
+        <result column="userName" property="userName"/>
+        <result column="userIcon" property="userIcon"/>
+        <collection property="childComments" column="{parentId = id}"
+                    select="graduation.spring.erent.app.dao.CommentMapper.getChildCommentsById"/>
+    </resultMap>
+
+    <resultMap id="ReplyCommentResponse" type="graduation.spring.erent.app.model.response.ReplyCommentResponse">
+        <id column="id" property="id"/>
+        <result column="talkid" property="talkID"/>
+        <result column="userid" property="userID"/>
+        <result column="parentid" property="parentID"/>
+        <result column="comment" property="comment"/>
+        <result column="create_time" property="createTime"/>
+        <result column="replier_id" property="replierID"/>
+        <result column="replier_name" property="replierName"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_icon" property="userIcon"/>
+    </resultMap>
+
+
+    <insert id="insert">
+        <selectKey keyProperty="id" resultType="java.lang.Integer"
+                   order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into talk_comment (talkid, userid, parentid, comment, replier_id, replier_name, create_time)
+        values (
+                #{talkID},
+                #{userID},
+                #{parentID},
+                #{comment},
+                #{replierID},
+                #{replierName},
+                #{createTime}
+               );
+    </insert>
+
+    <select id="getCommentById" resultMap="CommentResponse">
+        select a.*,b.user_name userName,b.user_icon userIcon
+        from talk_comment a
+        left join user b on a.userid = b.id
+        where
+            talkid = #{talkId} and parentid is null
+        order by a.create_time desc
+    </select>
+
+    <select id="getChildCommentsById" resultMap="ReplyCommentResponse">
+        select *
+        from talk_comment a
+        left join user b on a.userid = b.id
+        where
+            parentid = #{parentId}
+        order by a.create_time asc
+    </select>
+
+    <select id="getCommentSizeById" resultType="Integer">
+        select count(1) from talk_comment
+        where
+            talkid = #{talkId} and parentid is null
+    </select>
+</mapper>

@@ -1,8 +1,11 @@
 package graduation.spring.erent;
 
+import graduation.spring.erent.app.model.Comment;
 import graduation.spring.erent.app.model.Rental;
 import graduation.spring.erent.app.model.Talk;
 import graduation.spring.erent.app.model.User;
+import graduation.spring.erent.app.model.response.CommentResponse;
+import graduation.spring.erent.app.service.CommentService;
 import graduation.spring.erent.app.service.RentService;
 import graduation.spring.erent.app.service.TalkService;
 import graduation.spring.erent.app.service.UserService;
@@ -31,10 +34,23 @@ public class ErentApplicationTests {
     @Autowired
     private TalkService talkService;
 
+    @Autowired
+    private CommentService commentService;
+
     @Test
     public void contextLoads() {
     }
 
+
+    @Test
+    public void commenttest() {
+        List<CommentResponse> comment = commentService.getCommentByTalkId(1);
+        int num =1;
+        for(CommentResponse item : comment){
+            System.out.println(num + ' '+item.getComment());
+            num++;
+        }
+    }
 
     @Test
     public void talktest(){
