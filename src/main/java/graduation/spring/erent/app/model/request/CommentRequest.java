@@ -1,20 +1,17 @@
-package graduation.spring.erent.app.model;
+package graduation.spring.erent.app.model.request;
 
-import graduation.spring.erent.sys.base.BaseModel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Comment extends BaseModel {
+public class CommentRequest {
+
     private int talkID;
     private int userID;
-    private String userName;
-    private String userIcon;
+    private Integer talkOwnerId;
     private Integer parentID;
     private String comment;
     private Integer replierID;
