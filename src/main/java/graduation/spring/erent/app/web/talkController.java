@@ -19,7 +19,7 @@ public class talkController {
 
 
     @RequestMapping("/api/testTalk")
-    public void testTalk(@RequestBody Talk talk){
+    public void saveTalk(@RequestBody Talk talk){
         System.out.println(talk.getContent());
         System.out.println(talk.getUserID());
         System.out.println(talk.getCreateTime());
